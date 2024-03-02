@@ -1,0 +1,13 @@
+:root{
+  --theme-color: #f3f3f3;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: rgba(67, 67, 67, 0.197);
+}
