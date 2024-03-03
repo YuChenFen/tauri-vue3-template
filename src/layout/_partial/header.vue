@@ -30,7 +30,7 @@ appWindow.onResized(async () => {
 .header {
     height: 30px;
     width: 100%;
-    background: var(--theme-color);
+    background: rgb(var(--theme-color));
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -46,13 +46,14 @@ appWindow.onResized(async () => {
 }
 
 .header-btn:hover {
-    background-color: rgb(218 218 218);
+    background-color: rgba(150, 150, 150, 0.25);
 }
-
+.header-btn :deep(svg) {
+    fill: rgb(var(--text-color));
+}
 .close:hover {
     background-color: rgb(232 17 35);
 }
-
 .close:hover :deep(svg) {
     fill: white;
 }

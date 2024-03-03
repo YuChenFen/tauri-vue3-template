@@ -1,5 +1,35 @@
 :root{
-  --theme-color: #f3f3f3;
+  --theme-color: 243, 243, 243;
+  --text-color: 0, 0, 0;
+  --bright-theme-color: 243, 243, 243;
+  --bright-text-color: 0, 0, 0;
+  --dark-theme-color: 32, 32, 32;
+  --dark-text-color: 255, 255, 255;
+
+  /* 组件主题色 */
+  --text-button-background-color: #ffffff;
+  --text-button-color: 0, 0, 0;
+  --text-button-hover-background-color: #f6f6f6e8;
+  --text-button-hover-color: #5b5b5b;
+  --text-button-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px -1px, rgba(0, 0, 0, 0.06) 0px 2px 2px -1px;
+  --tag-button-select-background-color: #07cddb;
+  --tag-button-select-text-color: #ffffff;
+
+  /* 亮 */
+  --bright-text-button-background-color: #ffffff;
+  --bright-text-button-color: 0, 0, 0;
+  --bright-text-button-hover-background-color: #f6f6f6e8;
+  --bright-text-button-hover-color: #5b5b5b;
+  --bright-text-button-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px -1px, rgba(0, 0, 0, 0.06) 0px 2px 2px -1px;
+  --bright-tag-button-select-text-color: #ffffff;
+
+  /* 暗 */
+  --dark-text-button-background-color: #2d2d2d;
+  --dark-text-button-color: 255, 255, 255;
+  --dark-text-button-hover-background-color: #3e3e3e;
+  --dark-text-button-hover-color: #d0d0d0;
+  --dark-text-button-shadow: rgba(255, 255, 255, 0.4) 0px 2px 3px -1px, rgba(255, 255, 255, 0.2) 0px 2px 2px -1px;
+  --dark-tag-button-select-text-color: #000000;
 }
 
 * {
@@ -10,4 +40,5 @@
 
 html, body {
   background-color: rgba(67, 67, 67, 0.197);
+  background-color: rgba(var(--theme-color), 0.7);
 }

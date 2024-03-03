@@ -1,0 +1,68 @@
+<template>
+    <div class="text-button" :class="{'select': select}" @click.stop="click">
+        <div class="content">
+            <slot></slot>
+            <p>{{ text }}</p>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const props = defineProps({
+    // 按钮文本
+    text: {
+        type: String,
+        required: true,
+        default: ''
+    },
+    // 值
+    select: {
+        type: Boolean,
+        required: true,
+        default: false
+    }
+})
+
+const emits = defineEmits(['update:select']);
+const select = ref(props.select);
+function click(e) {
+    select.value = !select.value;
+    emits('update:select', select.value);
+}
+</script>
+
+<style scoped>
+.text-button {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid rgba(var(--text-button-color), .1);
+    border-radius: 100vh;
+    background-color: var(--text-button-background-color);
+    color: rgb(var(--text-button-color));
+    cursor: pointer;
+}
+
+.text-button .content {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.text-button .p {
+    font-size: 14px;
+}
+.select{
+    background-color: var(--tag-button-select-background-color);
+    color: var(--tag-button-select-text-color);
+}
+</style>
