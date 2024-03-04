@@ -1,7 +1,7 @@
 <template>
     <div class="two-checkbox">
         <label class="custom-checkbox">
-            <input name="dummy" type="checkbox">
+            <input name="dummy" type="checkbox" @click.stop="change($event.target.checked)">
             <span class="checkmark"></span>
         </label>
         <p>
@@ -19,6 +19,10 @@ const props = defineProps({
         default: ''
     }
 })
+const emit = defineEmits(['change'])
+const change = (e) => {
+    emit('change', e);
+}
 </script>
 
 <style scoped>
@@ -35,7 +39,7 @@ const props = defineProps({
     -ms-user-select: none;
     user-select: none;
     font-size: 14px;
-    color: rgb(var(--text-button-color));
+    color: rgb(var(--app-color));
 }
 
 .custom-checkbox {
@@ -55,7 +59,7 @@ const props = defineProps({
 .custom-checkbox .checkmark {
     width: 18px;
     height: 18px;
-    border: 1.5px solid rgb(var(--text-button-color));
+    border: 1.5px solid rgb(var(--app-color));
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -64,7 +68,7 @@ const props = defineProps({
 }
 
 .custom-checkbox input[type="checkbox"]:checked+.checkmark {
-    background-color: var(--tag-button-select-background-color);
+    background-color: var(--app-highlight-background-color);
     border-width: 0.5px;
     transform: scale(1.1) rotateZ(360deg) rotateY(360deg);
 }
@@ -76,6 +80,6 @@ const props = defineProps({
     transition: color 0.3s, transform 0.3s;
 }
 .custom-checkbox input[type="checkbox"]:checked + .checkmark::before {
-    color: var(--text-button-background-color);
+    color: var(--app-background-color);
 }
 </style>

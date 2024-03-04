@@ -6,12 +6,12 @@ export const useThemeStore = defineStore('theme', {
         _cssArray: [
             "theme-color",
             "text-color",
-            "text-button-background-color",
-            "text-button-color",
-            "text-button-hover-background-color",
-            "text-button-shadow",
-            "text-button-hover-color",
-            "tag-button-select-text-color"
+            "app-background-color",
+            "app-color",
+            "app-hover-background-color",
+            "app-shadow",
+            "app-hover-color",
+            "app-highlight-text-color"
         ]
     }),
     getters: {},

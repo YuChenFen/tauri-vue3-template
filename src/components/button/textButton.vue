@@ -33,19 +33,19 @@ function click(e) {
 .text-button {
     display: inline-block;
     padding: 6px 10px;
-    border: 1px solid rgba(var(--text-button-color), .1);
-    box-shadow: var(--text-button-shadow);
+    border: 1px solid rgba(var(--app-color), .1);
+    box-shadow: var(--app-shadow);
     border-radius: 5px;
-    background-color: var(--text-button-background-color);
-    color: rgb(var(--text-button-color));
+    background-color: var(--app-background-color);
+    color: rgb(var(--app-color));
     cursor: pointer;
 }
 .text-button:hover {
-    background-color: var(--text-button-hover-background-color);
+    background-color: var(--app-hover-background-color);
 }
 .text-button:active {
-    /* background-color: var(--text-button-background-color); */
-    color: var(--text-button-hover-color);
+    /* background-color: var(--app-background-color); */
+    color: var(--app-hover-color);
     box-shadow: none;
 }
 .text-button p{

@@ -1,5 +1,5 @@
 <template>
-    <div class="text-button" :class="{'select': select}" @click.stop="click">
+    <div class="tag-button" :class="{'select': select}" @click.stop="click">
         <div class="content">
             <slot></slot>
             <p>{{ text }}</p>
@@ -34,17 +34,17 @@ function click(e) {
 </script>
 
 <style scoped>
-.text-button {
+.tag-button {
     display: inline-block;
     padding: 6px 10px;
-    border: 1px solid rgba(var(--text-button-color), .1);
+    border: 1px solid rgba(var(--app-color), .1);
     border-radius: 100vh;
-    background-color: var(--text-button-background-color);
-    color: rgb(var(--text-button-color));
+    background-color: var(--app-background-color);
+    color: rgb(var(--app-color));
     cursor: pointer;
 }
 
-.text-button .content {
+.tag-button .content {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -58,11 +58,11 @@ function click(e) {
     gap: 6px;
 }
 
-.text-button .p {
+.tag-button .p {
     font-size: 14px;
 }
 .select{
-    background-color: var(--tag-button-select-background-color);
-    color: var(--tag-button-select-text-color);
+    background-color: var(--app-highlight-background-color);
+    color: var(--app-highlight-text-color);
 }
 </style>
