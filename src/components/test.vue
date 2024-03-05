@@ -2,20 +2,20 @@
     <div>
         <div class="line">
             <text-button style="margin-left: 10px;" text="切换主题" @click="chuangeTheme"></text-button>
-            <text-button text="按钮"></text-button>
-            <icon-button>
+            <text-button text="按钮" @click="() => { console.log('点击了按钮'); }"></text-button>
+            <icon-button @click="() => { console.log('点击了按钮'); }">
                 <svg-icon style="margin: 2px;" name="header-close"></svg-icon>
             </icon-button>
-            <icon-button>
+            <icon-button @click="() => { console.log('点击了按钮'); }">
                 <svg-icon name="header-close"></svg-icon>
                 <p style="margin-left: 5px;">关闭</p>
             </icon-button>
-            <tag-button text="标签" :select="select">
+            <tag-button text="标签" :select="select" @change="(v) => { console.log('点击了标签', v); }">
                 <svg-icon name="tag"></svg-icon>
             </tag-button>
         </div>
         <div class="line">
-            <two-checkbox text="复选框"></two-checkbox>
+            <two-checkbox text="复选框" @change="(v) => { console.log('点击了复选框', v); }"></two-checkbox>
         </div>
         <div class="line">
             <text-select :options="items" :defaultSelected="item" :width="100" @change="(i) => item = i"
@@ -26,6 +26,12 @@
         <div class="line">
             <radio :group="['选项一', '选项二', '选项三', '选项四']" defaultRadio="选项一" @change="(i) => { console.log(i); }"></radio>
             <!-- <radio :group="[1,2,3,4,5]"></radio> -->
+        </div>
+        <div class="line">
+            <slider :width="300" :show-tips="true" @change="(v) => { console.log(v); }"></slider>
+        </div>
+        <div class="line">
+            <toggle-switch v-model:value="switchValue" @change="(e) => {console.log(switchValue);}"></toggle-switch>
         </div>
     </div>
 </template>
@@ -38,6 +44,8 @@ import twoCheckbox from '@/components/checkbox/twoCheckbox.vue';
 import textSelect from './select/textSelect.vue';
 import selectButton from './button/selectButton.vue';
 import radio from './radio/radio.vue';
+import slider from './slider/slider.vue';
+import toggleSwitch from './switch/toggleSwitch.vue';
 import { useThemeStore } from '@/stores/theme.js';
 import svgIcon from "@/assets/icons/svgIcon.vue";
 import { ref, h } from 'vue';
@@ -78,6 +86,8 @@ const iconItems = [
     }
 ]
 const iconItem = ref(0);
+
+const switchValue = ref(false);
 </script>
 
 <style scoped>

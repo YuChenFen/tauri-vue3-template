@@ -71,7 +71,7 @@ const props = defineProps({
         default: '14px'
     }
 })
-const emit = defineEmits(['change'])
+const emits = defineEmits(['change'])
 const isShowOptions = ref(false);
 const svgRef = ref(null);
 const closeOptions = () => {
@@ -105,7 +105,7 @@ function show(e) {
 
 function change(option) {
     closeOptions()
-    emit('change', option)
+    emits('change', option)
 }
 </script>
 

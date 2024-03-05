@@ -7,10 +7,16 @@ import testVue from './components/test.vue'
 <template>
   <div style="height: 100vh;width: 100vw;">
     <headerVue></headerVue>
-    <testVue></testVue>
+    <div class="content">
+      <testVue></testVue>
+    </div>
   </div>
 </template>
 
 <style scoped>
-
+.content{
+  height: calc(100vh - 30px);
+  width: 100vw;
+  overflow-y: scroll;
+}
 </style>

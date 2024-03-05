@@ -19,9 +19,9 @@ const props = defineProps({
         default: ''
     }
 })
-const emit = defineEmits(['change'])
+const emits = defineEmits(['change'])
 const change = (e) => {
-    emit('change', e);
+    emits('change', e);
 }
 </script>
 

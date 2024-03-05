@@ -25,11 +25,12 @@ const props = defineProps({
     }
 })
 
-const emits = defineEmits(['update:select']);
+const emits = defineEmits(['update:select', 'change']);
 const select = ref(props.select);
 function click(e) {
     select.value = !select.value;
     emits('update:select', select.value);
+    emits('change', select.value);
 }
 </script>
 

@@ -25,10 +25,10 @@ const props = defineProps({
     }
 })
 const inputName = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36)
-const emit = defineEmits(['change'])
+const emits = defineEmits(['change'])
 
 function change(item) {
-    emit('change', item)
+    emits('change', item)
 }
 
 </script>
@@ -39,6 +39,7 @@ function change(item) {
     flex-direction: column;
     align-items: center;
     color: rgb(var(--app-color));
+    font-size: 14px;
 }
 
 .radio-button {
