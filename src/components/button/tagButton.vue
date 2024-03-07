@@ -59,8 +59,10 @@ function click(e) {
     gap: 6px;
 }
 
-.tag-button .p {
+.tag-button p {
     font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .select{
     background-color: var(--app-highlight-background-color);

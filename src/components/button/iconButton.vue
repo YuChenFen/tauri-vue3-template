@@ -1,10 +1,10 @@
 <template>
-    <div class="icon-button" @click.stop="click">
+    <button class="icon-button" @click.stop="click">
         <div class="icon">
             <slot>
             </slot>
         </div>
-    </div>
+    </button>
 </template>
 
 <script setup>

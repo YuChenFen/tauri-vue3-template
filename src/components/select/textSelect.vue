@@ -79,7 +79,7 @@ const closeOptions = () => {
 }
 watch(isShowOptions, (val) => {
     if(val){
-        if(!svgRef.value){
+        if(svgRef.value){
             svgRef.value.style.transform = 'rotate(180deg)';
         }
         // 如果点击就关闭 addEventListener 事件 函数 捕获阶段
@@ -88,7 +88,7 @@ watch(isShowOptions, (val) => {
         document.addEventListener('contextmenu', closeOptions, true);
 
     }else{
-        if(!svgRef.value){
+        if(svgRef.value){
             svgRef.value.style.transform = 'rotate(0deg)';
         }
         document.removeEventListener('click', closeOptions);
@@ -124,8 +124,6 @@ function change(option) {
     -webkit-box-shadow: var(--app-shadow);
     box-shadow: var(--app-shadow);
     display: flex;
-    /* font-family: auto; */
-    transition: all .5s;
     cursor: pointer;
     align-items: center;
     z-index: 100;

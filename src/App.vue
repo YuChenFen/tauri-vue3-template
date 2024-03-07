@@ -18,5 +18,6 @@ import testVue from './components/test.vue'
   height: calc(100vh - 30px);
   width: 100vw;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 </style>

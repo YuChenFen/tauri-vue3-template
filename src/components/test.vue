@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="line">
-            <text-button style="margin-left: 10px;" text="切换主题" @click="chuangeTheme"></text-button>
+            <text-button text="切换主题" @click="chuangeTheme"></text-button>
             <text-button text="按钮" @click="() => { console.log('点击了按钮'); }"></text-button>
             <icon-button @click="() => { console.log('点击了按钮'); }">
                 <svg-icon style="margin: 2px;" name="header-close"></svg-icon>
             </icon-button>
             <icon-button @click="() => { console.log('点击了按钮'); }">
                 <svg-icon name="header-close"></svg-icon>
-                <p style="margin-left: 5px;">关闭</p>
+                <p style="margin-left: 5px;text-overflow: ellipsis;white-space: nowrap;">关闭</p>
             </icon-button>
             <tag-button text="标签" :select="select" @change="(v) => { console.log('点击了标签', v); }">
                 <svg-icon name="tag"></svg-icon>
@@ -33,6 +33,19 @@
         <div class="line">
             <toggle-switch v-model:value="switchValue" @change="(e) => {console.log(switchValue);}"></toggle-switch>
         </div>
+        <div class="line">
+            <text-button text="成功" @click="showMessage('success','成功','成功啦   (^&^)/')"></text-button>
+            <text-button text="警告" @click="showMessage('warning','警告','警告！  （～￣▽￣～）')"></text-button>
+            <text-button text="错误" @click="showMessage('error','错误','发生错误了！！！  w(ﾟДﾟ)w')"></text-button>
+            <text-button text="提示" @click="showMessage('info','提示','这是一个消息   ( つ•̀ω•́)つ')"></text-button>
+        </div>
+        <div class="line">
+            <customize-table :header-data="tableHeaders" :data="tableData" :height="250" :min-width="500">
+            </customize-table>
+        </div>
+        <div class="line">
+            <text-button text="创建数据库" @click="create_database"></text-button>
+        </div>
     </div>
 </template>
 
@@ -46,9 +59,13 @@ import selectButton from './button/selectButton.vue';
 import radio from './radio/radio.vue';
 import slider from './slider/slider.vue';
 import toggleSwitch from './switch/toggleSwitch.vue';
+import Message from './notification/src/message';
+import customizeTable from './table/customizeTable.vue';
 import { useThemeStore } from '@/stores/theme.js';
 import svgIcon from "@/assets/icons/svgIcon.vue";
 import { ref, h } from 'vue';
+import { invoke } from "@tauri-apps/api/tauri";
+
 let select = ref(false);
 
 const themeStore = useThemeStore();
@@ -85,9 +102,217 @@ const iconItems = [
         text: '最大化'
     }
 ]
-const iconItem = ref(0);
 
 const switchValue = ref(false);
+const showMessage = (type, title, text) => {
+    Message({
+        title: title,
+        type: type,
+        text: text,
+        // isBrief: false,
+        duration: 5000
+    })
+}
+const tableHeaders = [
+    {
+        text: '姓名',
+        prop: 'name',
+        width: '100px'
+    },
+    {
+        text: '年龄',
+        prop: 'age',
+        width: '100px'
+    },
+    {
+        text: '性别',
+        prop: 'sex',
+        width: '100px'
+    },
+    {
+        text: '地址',
+        prop: 'address',
+        width: '100px'
+    },
+    {
+        text: '时间',
+        prop: 'time',
+        width: '150px'
+    },
+    {
+        text: '状态',
+        prop: 'status',
+        width: '100px'
+    }
+]
+const tableData = [
+    {
+        name: '张三',
+        age: 18,
+        sex: '男',
+        address: '北京',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '李四',
+        age: 20,
+        sex: '女',
+        address: '上海',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '王五',
+        age: 22,
+        sex: '男',
+        address: '广州',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '赵六',
+        age: 25,
+        sex: '男',
+        address: '深圳',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '张三',
+        age: 18,
+        sex: '男',
+        address: '北京',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '李四',
+        age: 20,
+        sex: '女',
+        address: '上海',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '王五',
+        age: 22,
+        sex: '男',
+        address: '广州',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '赵六',
+        age: 25,
+        sex: '男',
+        address: '深圳',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '张三',
+        age: 18,
+        sex: '男',
+        address: '北京',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '李四',
+        age: 20,
+        sex: '女',
+        address: '上海',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '王五',
+        age: 22,
+        sex: '男',
+        address: '广州',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '赵六',
+        age: 25,
+        sex: '男',
+        address: '深圳',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '张三',
+        age: 18,
+        sex: '男',
+        address: '北京',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '李四',
+        age: 20,
+        sex: '女',
+        address: '上海',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '王五',
+        age: 22,
+        sex: '男',
+        address: '广州',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '赵六',
+        age: 25,
+        sex: '男',
+        address: '深圳',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '张三',
+        age: 18,
+        sex: '男',
+        address: '北京',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '李四',
+        age: 20,
+        sex: '女',
+        address: '上海',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '王五',
+        age: 22,
+        sex: '男',
+        address: '广州',
+        time: '2021-01-01',
+        status: '正常'
+    },
+    {
+        name: '赵六',
+        age: 25,
+        sex: '男',
+        address: '深圳',
+        time: '2021-01-01',
+        status: '正常'
+    },
+]
+
+async function create_database() {
+  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+  let ans = await invoke("create_db");
+  console.log(ans);
+}
 </script>
 
 <style scoped>
@@ -95,6 +320,7 @@ const switchValue = ref(false);
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
     padding: 10px;
     border-radius: 5px;
     margin: 10px;

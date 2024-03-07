@@ -1,7 +1,7 @@
 <template>
-    <div class="text-button" @click.stop="click">
+    <button class="text-button" @click.stop="click">
         <p>{{ text }}</p>
-    </div>
+    </button>
 </template>
 
 <script setup>
@@ -54,5 +54,7 @@ function click(e) {
     -ms-user-select: none;
     user-select: none;
     font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 </style>
