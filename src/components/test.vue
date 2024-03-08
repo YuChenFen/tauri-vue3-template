@@ -45,6 +45,11 @@
         </div>
         <div class="line">
             <text-button text="创建数据库" @click="create_database"></text-button>
+            <text-button text="创建表" @click="create_table"></text-button>
+            <text-button text="插入数据" @click="insert_data"></text-button>
+            <text-button text="查询数据" @click="select_data"></text-button>
+            <text-button text="删除数据" @click="delete_data"></text-button>
+            <text-button text="更新数据" @click="update_data"></text-button>
         </div>
     </div>
 </template>
@@ -309,9 +314,28 @@ const tableData = [
 ]
 
 async function create_database() {
-  // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-  let ans = await invoke("create_db");
+  let ans = await invoke("create_database");
   console.log(ans);
+}
+async function create_table() {
+    let ans = await invoke("create_table");
+    console.log(ans);
+}
+async function insert_data(){
+    let ans = await invoke("insert_data", {name: "张三", age: 18, sex: "男", address: "北京", time: "2021-01-01", status: "正常"});
+    console.log(ans);
+}
+async function select_data(){
+    let ans = await invoke("select_data");
+    console.log(JSON.parse(ans));
+}
+async function delete_data(){
+    let ans = await invoke("delete_data", {id: 1});
+    console.log(ans);
+}
+async function update_data(){
+    let ans = await invoke("update_data", {id: 1, name: "李四", age: 23, sex: "女", address: "上海", time: "2022-03-02", status: "处理"});
+    console.log(ans);
 }
 </script>
 
