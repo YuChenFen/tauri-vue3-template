@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="row in data" :key="row">
+                <tr v-for="row in data" :key="rowKey ? row[rowKey] : row">
                     <td v-for="header in headerData" :key="header.prop">
                         <div>{{ row[header.prop] }}</div>
                     </td>
@@ -45,6 +45,10 @@ const props = defineProps({
     minWidth: {
         type: Number,
         default: 0
+    },
+    rowKey: {
+        type: String,
+        default: ''
     }
 })
 </script>

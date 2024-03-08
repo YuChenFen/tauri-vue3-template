@@ -1,7 +1,7 @@
 <template>
     <div class="two-checkbox">
         <label class="custom-checkbox">
-            <input name="dummy" type="checkbox" @click.stop="change($event.target.checked)">
+            <input name="dummy" type="checkbox" @click.stop="change($event.target.checked)" :checked="value">
             <span class="checkmark"></span>
         </label>
         <p>
@@ -12,6 +12,11 @@
 
 <script setup>
 const props = defineProps({
+    value:{
+        type: Boolean,
+        required: true,
+        default: false
+    },
     // 按钮文本
     text: {
         type: String,
@@ -19,8 +24,9 @@ const props = defineProps({
         default: ''
     }
 })
-const emits = defineEmits(['change'])
+const emits = defineEmits(['update:value','change'])
 const change = (e) => {
+    emits('update:value', e);
     emits('change', e);
 }
 </script>

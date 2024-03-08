@@ -11,7 +11,9 @@ export const useThemeStore = defineStore('theme', {
             "app-hover-background-color",
             "app-shadow",
             "app-hover-color",
-            "app-highlight-text-color"
+            "app-highlight-text-color",
+            "app-card-content-background-color",
+            "app-card-footer-background-color"
         ]
     }),
     getters: {},

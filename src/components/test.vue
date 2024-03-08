@@ -10,12 +10,13 @@
                 <svg-icon name="header-close"></svg-icon>
                 <p style="margin-left: 5px;text-overflow: ellipsis;white-space: nowrap;">关闭</p>
             </icon-button>
-            <tag-button text="标签" :select="select" @change="(v) => { console.log('点击了标签', v); }">
+            <tag-button text="标签" v-model:select="select" @change="(v) => { console.log('点击了标签', select); }">
                 <svg-icon name="tag"></svg-icon>
             </tag-button>
         </div>
         <div class="line">
-            <two-checkbox text="复选框" @change="(v) => { console.log('点击了复选框', v); }"></two-checkbox>
+            <two-checkbox text="复选框" v-model:value="checkboxValue"
+                @change="(v) => { console.log('点击了复选框', checkboxValue); }"></two-checkbox>
         </div>
         <div class="line">
             <text-select :options="items" :defaultSelected="item" :width="100" @change="(i) => item = i"
@@ -24,23 +25,25 @@
                 @change="(i) => { console.log(i); }" style="margin-left: 10px;"></select-button>
         </div>
         <div class="line">
-            <radio :group="['选项一', '选项二', '选项三', '选项四']" defaultRadio="选项一" @change="(i) => { console.log(i); }"></radio>
+            <radio :group="['选项一', '选项二', '选项三', '选项四']" defaultRadio="选项一" @change="(i) => { console.log(i); }">
+            </radio>
             <!-- <radio :group="[1,2,3,4,5]"></radio> -->
         </div>
         <div class="line">
-            <slider :width="300" :show-tips="true" @change="(v) => { console.log(v); }"></slider>
+            <slider v-model:value="sliderValue" :width="300" :show-tips="true"
+                @change="(v) => { console.log(sliderValue); }"></slider>
         </div>
         <div class="line">
-            <toggle-switch v-model:value="switchValue" @change="(e) => {console.log(switchValue);}"></toggle-switch>
+            <toggle-switch v-model:value="switchValue" @change="(e) => { console.log(switchValue); }"></toggle-switch>
         </div>
         <div class="line">
-            <text-button text="成功" @click="showMessage('success','成功','成功啦   (^&^)/')"></text-button>
-            <text-button text="警告" @click="showMessage('warning','警告','警告！  （～￣▽￣～）')"></text-button>
-            <text-button text="错误" @click="showMessage('error','错误','发生错误了！！！  w(ﾟДﾟ)w')"></text-button>
-            <text-button text="提示" @click="showMessage('info','提示','这是一个消息   ( つ•̀ω•́)つ')"></text-button>
+            <text-button text="成功" @click="showMessage('success', '成功', '成功啦   (^&^)/')"></text-button>
+            <text-button text="警告" @click="showMessage('warning', '警告', '警告！  （～￣▽￣～）')"></text-button>
+            <text-button text="错误" @click="showMessage('error', '错误', '发生错误了！！！  w(ﾟДﾟ)w')"></text-button>
+            <text-button text="提示" @click="showMessage('info', '提示', '这是一个消息   ( つ•̀ω•́)つ')"></text-button>
         </div>
         <div class="line">
-            <customize-table :header-data="tableHeaders" :data="tableData" :height="250" :min-width="500">
+            <customize-table :header-data="tableHeaders" :data="tableData" :height="250" :min-width="500" row-key="id">
             </customize-table>
         </div>
         <div class="line">
@@ -50,6 +53,21 @@
             <text-button text="查询数据" @click="select_data"></text-button>
             <text-button text="删除数据" @click="delete_data"></text-button>
             <text-button text="更新数据" @click="update_data"></text-button>
+        </div>
+        <div class="line">
+            <text-button text="打开对话框" @click="isOpenDialog = true"></text-button>
+            <customize-dialog v-model:open="isOpenDialog" @ok="() => { console.log('点击了确定按钮'); }">
+                <template #body>
+                    <div class="user-select" style="padding: 20px;">
+                        <header style="font-size: 20px;font-weight: 500;margin-bottom: 10px;">
+                            这是一个对话框
+                        </header>
+                        <p>在遥远的星际彼岸，舞动着粉红色的小象，它们围绕着梦幻般的像素树欢快地跳动着，每一步都踩在由彩虹代码编织而成的草地上。</p>
+                    </div>
+                </template>
+                <!-- <template #footer>
+                </template> -->
+            </customize-dialog>
         </div>
     </div>
 </template>
@@ -66,6 +84,7 @@ import slider from './slider/slider.vue';
 import toggleSwitch from './switch/toggleSwitch.vue';
 import Message from './notification/src/message';
 import customizeTable from './table/customizeTable.vue';
+import customizeDialog from './dialog/customizeDialog.vue';
 import { useThemeStore } from '@/stores/theme.js';
 import svgIcon from "@/assets/icons/svgIcon.vue";
 import { ref, h } from 'vue';
@@ -84,7 +103,7 @@ function chuangeTheme() {
         a = 1;
     }
 }
-
+const checkboxValue = ref(false);
 const items = [
     '选项一',
     '选项二',
@@ -107,7 +126,7 @@ const iconItems = [
         text: '最大化'
     }
 ]
-
+const sliderValue = ref(0)
 const switchValue = ref(false);
 const showMessage = (type, title, text) => {
     Message({
@@ -150,193 +169,43 @@ const tableHeaders = [
         width: '100px'
     }
 ]
-const tableData = [
-    {
-        name: '张三',
-        age: 18,
-        sex: '男',
-        address: '北京',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '李四',
-        age: 20,
-        sex: '女',
-        address: '上海',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '王五',
-        age: 22,
-        sex: '男',
-        address: '广州',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '赵六',
-        age: 25,
-        sex: '男',
-        address: '深圳',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '张三',
-        age: 18,
-        sex: '男',
-        address: '北京',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '李四',
-        age: 20,
-        sex: '女',
-        address: '上海',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '王五',
-        age: 22,
-        sex: '男',
-        address: '广州',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '赵六',
-        age: 25,
-        sex: '男',
-        address: '深圳',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '张三',
-        age: 18,
-        sex: '男',
-        address: '北京',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '李四',
-        age: 20,
-        sex: '女',
-        address: '上海',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '王五',
-        age: 22,
-        sex: '男',
-        address: '广州',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '赵六',
-        age: 25,
-        sex: '男',
-        address: '深圳',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '张三',
-        age: 18,
-        sex: '男',
-        address: '北京',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '李四',
-        age: 20,
-        sex: '女',
-        address: '上海',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '王五',
-        age: 22,
-        sex: '男',
-        address: '广州',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '赵六',
-        age: 25,
-        sex: '男',
-        address: '深圳',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '张三',
-        age: 18,
-        sex: '男',
-        address: '北京',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '李四',
-        age: 20,
-        sex: '女',
-        address: '上海',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '王五',
-        age: 22,
-        sex: '男',
-        address: '广州',
-        time: '2021-01-01',
-        status: '正常'
-    },
-    {
-        name: '赵六',
-        age: 25,
-        sex: '男',
-        address: '深圳',
-        time: '2021-01-01',
-        status: '正常'
-    },
-]
+const tableData = ref([])
 
 async function create_database() {
-  let ans = await invoke("create_database");
-  console.log(ans);
+    let ans = await invoke("create_database");
+    console.log(ans);
 }
 async function create_table() {
     let ans = await invoke("create_table");
     console.log(ans);
 }
-async function insert_data(){
-    let ans = await invoke("insert_data", {name: "张三", age: 18, sex: "男", address: "北京", time: "2021-01-01", status: "正常"});
+async function insert_data() {
+    let ans = await invoke("insert_data", { name: "张三", age: 18, sex: "男", address: "北京", time: "2021-01-01", status: "正常" });
     console.log(ans);
+    select_data();
 }
-async function select_data(){
+async function select_data() {
     let ans = await invoke("select_data");
-    console.log(JSON.parse(ans));
+    let rows = JSON.parse(ans);
+    tableData.value.length = 0;
+    for (let i = 0, len = rows.length; i < len; i++) {
+        tableData.value.push(rows[i]);
+    }
+    console.log(rows);
 }
-async function delete_data(){
-    let ans = await invoke("delete_data", {id: 1});
+async function delete_data() {
+    let ans = await invoke("delete_data", { id: tableData.value[tableData.value.length - 1].id });
     console.log(ans);
+    select_data();
 }
-async function update_data(){
-    let ans = await invoke("update_data", {id: 1, name: "李四", age: 23, sex: "女", address: "上海", time: "2022-03-02", status: "处理"});
+async function update_data() {
+    let ans = await invoke("update_data", { id: tableData.value[tableData.value.length - 1].id, name: "李四", age: 23, sex: "女", address: "上海", time: "2022-03-02", status: "处理" });
     console.log(ans);
+    select_data();
 }
+select_data();
+
+const isOpenDialog = ref(false);
 </script>
 
 <style scoped>

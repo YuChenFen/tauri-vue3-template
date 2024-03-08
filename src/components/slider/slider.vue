@@ -28,8 +28,8 @@ const props = defineProps({
 const value = ref(props.value);
 const emits = defineEmits(['update:value', 'change']);
 function change(e) {
-    emits('update:value', e.target.value);
-    emits('change', e.target.value);
+    emits('update:value', Number(e.target.value));
+    emits('change', Number(e.target.value));
 }
 function getTipsLeft(value) {
     return ((props.width - 18) * value / 100) - 9;

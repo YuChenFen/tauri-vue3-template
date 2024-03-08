@@ -23,7 +23,7 @@ const poprs = defineProps({
     },
     type: {
         type: String,
-        default: 'success'
+        default: 'info'
     },
     text: {
         type: String,

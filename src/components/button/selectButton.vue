@@ -43,7 +43,7 @@ const props = defineProps({
         required: false,
         default: []
     },
-    // 默认选中的选项
+    // 图标
     icon: {
         type: Object,
         required: false,
