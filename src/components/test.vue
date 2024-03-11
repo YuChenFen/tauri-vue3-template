@@ -21,7 +21,7 @@
         <div class="line">
             <text-select :options="items" :defaultSelected="item" :width="100" @change="(i) => item = i"
                 style="margin-left: 10px;"></text-select>
-            <select-button :options="iconItems" :icon="iconTag" text="打开" :width="103.6"
+            <select-button :options="iconItems" :icon="iconTag" text="邮件" :width="103.6"
                 @change="(i) => { console.log(i); }" style="margin-left: 10px;"></select-button>
         </div>
         <div class="line">
@@ -62,12 +62,36 @@
                         <header style="font-size: 20px;font-weight: 500;margin-bottom: 10px;">
                             这是一个对话框
                         </header>
-                        <p>云朵飘过天空，风儿轻轻吹拂，却引不起心中的一丝波澜。我在时间的河流里漂流，像一片落叶，不知道会飘向何方。月亮挂在夜空，星辰闪烁，但我的心却像一片荒芜的沙漠，没有生机，没有希望。我在寻找着某种东西，却又不知道那到底是什么，只是盲目地前行，不知道何时会停下脚步。这一切都是那么的无意义，却又让我感到无尽的迷茫和困惑。</p>
+                        <p>云朵飘过天空，风儿轻轻吹拂，却引不起心中的一丝波澜。我在时间的河流里漂流，像一片落叶，不知道会飘向何方。月亮挂在夜空，星辰闪烁，但我的心却像一片荒芜的沙漠，没有生机，没有希望。我在寻找着某种东西，却又不知道那到底是什么，只是盲目地前行，不知道何时会停下脚步。这一切都是那么的无意义，却又让我感到无尽的迷茫和困惑。
+                        </p>
                     </div>
                 </template>
                 <!-- <template #footer>
                 </template> -->
             </customize-dialog>
+        </div>
+        <div class="line">
+            <text-input v-model:value="inputValue" input-type="text" placeholder="请输入内容" :show-clear="true"
+                @change="(v) => { console.log(inputValue); }" width="200px">
+            </text-input>
+            <text-input v-model:value="inputValue" :input-type="passwordType" placeholder="请输入内容" :show-clear="true"
+                width="200px">
+                <template #suffix>
+                    <div style="margin-right: 10px;display: flex;align-items: center;"
+                        @mousedown="passwordType = 'text'" @mouseup="passwordType = 'password'"
+                        @mouseleave="passwordType = 'password'" class="eyeIcon">
+                        <svg-icon name="eye"></svg-icon>
+                    </div>
+                </template>
+            </text-input>
+        </div>
+        <div class="line">
+            <div class="icon-group">
+                <span v-for="icon in iconGroup" :key="icon">
+                    <svg-icon :name="icon"></svg-icon>
+                    <p>{{ icon }}</p>
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -85,6 +109,7 @@ import toggleSwitch from './switch/toggleSwitch.vue';
 import Message from './notification/src/message';
 import customizeTable from './table/customizeTable.vue';
 import customizeDialog from './dialog/customizeDialog.vue';
+import textInput from './input/textInput.vue';
 import { useThemeStore } from '@/stores/theme.js';
 import svgIcon from "@/assets/icons/svgIcon.vue";
 import { ref, h } from 'vue';
@@ -96,7 +121,7 @@ const themeStore = useThemeStore();
 let a = 0;
 function chuangeTheme() {
     if (a) {
-        themeStore.changeTheme('bright');
+        themeStore.changeTheme('light');
         a = 0;
     } else {
         themeStore.changeTheme('dark');
@@ -115,15 +140,15 @@ const items = [
     '选项八'
 ];
 const item = ref('选项一');
-const iconTag = h(svgIcon, { name: 'tag' }, null)
+const iconTag = h(svgIcon, { name: 'mail' }, null)
 const iconItems = [
     {
-        icon: h(svgIcon, { name: 'header-close' }, null),
-        text: '关闭'
+        icon: h(svgIcon, { name: 'send', style: { height: '24px', width: '24px' } }, null),
+        text: '发送'
     },
     {
-        icon: h(svgIcon, { name: 'header-minimize' }, null),
-        text: '最大化'
+        icon: h(svgIcon, { name: 'header-close', style: { height: '24px', width: '24px' } }, null),
+        text: '关闭'
     }
 ]
 const sliderValue = ref(0)
@@ -206,6 +231,20 @@ async function update_data() {
 select_data();
 
 const isOpenDialog = ref(false);
+const inputValue = ref('');
+const passwordType = ref('password');
+const iconGroup = ref([
+    "tag",
+    "eye",
+    "up",
+    "add",
+    "home",
+    "flag",
+    "mail",
+    "send",
+    "save",
+    "cut"
+]);
 </script>
 
 <style scoped>
@@ -218,5 +257,43 @@ const isOpenDialog = ref(false);
     border-radius: 5px;
     margin: 10px;
     background-color: rgb(var(--theme-color));
+}
+
+.eyeIcon:active :deep(svg) {
+    fill: var(--app-hover-color);
+}
+
+.icon-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.icon-group span {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(var(--app-color), .1);
+    background-color: var(--app-background-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-group span p {
+    position: absolute;
+    bottom: 5px;
+    font-size: 12px;
+    color: rgb(var(--app-color));
+}
+.icon-group span:hover{
+    background-color: var(--app-hover-background-color);
+}
+.icon-group :deep(svg) {
+    width: 20px;
+    height: 20px;
+    fill: rgb(var(--app-color));
 }
 </style>

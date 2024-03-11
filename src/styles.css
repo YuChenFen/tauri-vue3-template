@@ -1,10 +1,6 @@
 :root {
   --theme-color: 243, 243, 243;
   --text-color: 0, 0, 0;
-  --bright-theme-color: 243, 243, 243;
-  --bright-text-color: 0, 0, 0;
-  --dark-theme-color: 32, 32, 32;
-  --dark-text-color: 255, 255, 255;
 
   /* 组件主题色 */
   --app-background-color: #ffffff;
@@ -18,26 +14,36 @@
   --app-card-content-background-color: #ffffff;
   --app-card-footer-background-color: #f3f3f3;
 
+}
 
+html[data-theme="light"] {
   /* 亮 */
-  --bright-app-background-color: #ffffff;
-  --bright-app-color: 0, 0, 0;
-  --bright-app-hover-background-color: #f6f6f6e8;
-  --bright-app-hover-color: #5b5b5b;
-  --bright-app-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px -1px, rgba(0, 0, 0, 0.06) 0px 2px 2px -1px;
-  --bright-app-highlight-text-color: #ffffff;
-  --bright-app-card-content-background-color: #ffffff;
-  --bright-app-card-footer-background-color: #f3f3f3;
+  --theme-color: 243, 243, 243;
+  --text-color: 0, 0, 0;
 
+  --app-background-color: #ffffff;
+  --app-color: 0, 0, 0;
+  --app-hover-background-color: #f6f6f6e8;
+  --app-hover-color: #5b5b5b;
+  --app-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px -1px, rgba(0, 0, 0, 0.06) 0px 2px 2px -1px;
+  --app-highlight-text-color: #ffffff;
+  --app-card-content-background-color: #ffffff;
+  --app-card-footer-background-color: #f3f3f3;
+}
+
+html[data-theme="dark"] {
   /* 暗 */
-  --dark-app-background-color: #2d2d2d;
-  --dark-app-color: 255, 255, 255;
-  --dark-app-hover-background-color: #3e3e3e;
-  --dark-app-hover-color: #d0d0d0;
-  --dark-app-shadow: rgba(255, 255, 255, 0.4) 0px 2px 3px -1px, rgba(255, 255, 255, 0.2) 0px 2px 2px -1px;
-  --dark-app-highlight-text-color: #000000;
-  --dark-app-card-content-background-color: #2b2b2b;
-  --dark-app-card-footer-background-color: #202020;
+  --theme-color: 32, 32, 32;
+  --text-color: 255, 255, 255;
+
+  --app-background-color: #2d2d2d;
+  --app-color: 255, 255, 255;
+  --app-hover-background-color: #3e3e3e;
+  --app-hover-color: #d0d0d0;
+  --app-shadow: rgba(255, 255, 255, 0.4) 0px 2px 3px -1px, rgba(255, 255, 255, 0.2) 0px 2px 2px -1px;
+  --app-highlight-text-color: #000000;
+  --app-card-content-background-color: #2b2b2b;
+  --app-card-footer-background-color: #202020;
 }
 
 * {
