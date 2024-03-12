@@ -1,5 +1,5 @@
 <template>
-    <button class="icon-button" @click.stop="click">
+    <button class="icon-button" :class="{ 'disabled-button': disabled }" @click.stop="click">
         <div class="icon">
             <slot>
             </slot>
@@ -42,10 +42,15 @@ function click(e) {
     background-color: var(--app-hover-background-color);
 }
 
+.disabled-button, 
 .icon-button:active {
-    /* background-color: var(--app-background-color); */
+    background-color: var(--app-hover-background-color);
     color: var(--app-hover-color);
     box-shadow: none;
+}
+
+.disabled-button{
+    cursor: not-allowed;
 }
 
 .icon-button .icon {

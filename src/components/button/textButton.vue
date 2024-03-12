@@ -1,5 +1,5 @@
 <template>
-    <button class="text-button" @click.stop="click">
+    <button class="text-button" :class="{ 'disabled-button': disabled }" @click.stop="click">
         <p>{{ text }}</p>
     </button>
 </template>
@@ -43,11 +43,18 @@ function click(e) {
 .text-button:hover {
     background-color: var(--app-hover-background-color);
 }
+
+.disabled-button,
 .text-button:active {
-    /* background-color: var(--app-background-color); */
+    background-color: var(--app-hover-background-color);
     color: var(--app-hover-color);
     box-shadow: none;
 }
+
+.disabled-button{
+    cursor: not-allowed;
+}
+
 .text-button p{
     -webkit-user-select: none;
     -moz-user-select: none;

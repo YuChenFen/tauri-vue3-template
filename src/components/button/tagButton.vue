@@ -68,4 +68,10 @@ function click(e) {
     background-color: var(--app-highlight-background-color);
     color: var(--app-highlight-text-color);
 }
+.tag-button:hover{
+    background-color: var(--app-hover-background-color);
+}
+.select:hover{
+    background-color: var(--app-highlight-hover-background-color);
+}
 </style>

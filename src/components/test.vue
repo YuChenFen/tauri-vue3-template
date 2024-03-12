@@ -3,6 +3,7 @@
         <div class="line">
             <text-button text="切换主题" @click="chuangeTheme"></text-button>
             <text-button text="按钮" @click="() => { console.log('点击了按钮'); }"></text-button>
+            <text-button text="禁用按钮" :disabled="true"></text-button>
             <icon-button @click="() => { console.log('点击了按钮'); }">
                 <svg-icon style="margin: 2px;" name="header-close"></svg-icon>
             </icon-button>
@@ -21,8 +22,15 @@
         <div class="line">
             <text-select :options="items" :defaultSelected="item" :width="100" @change="(i) => item = i"
                 style="margin-left: 10px;"></text-select>
-            <select-button :options="iconItems" :icon="iconTag" text="邮件" :width="103.6"
-                @change="(i) => { console.log(i); }" style="margin-left: 10px;"></select-button>
+            <item-menu :options="iconItems" @change="(i) => { console.log(i); }" v-model:show="showItemMenu"
+                position="right">
+                <icon-button @click="showItemMenu = true">
+                    <div style="display: flex;gap: 10px;margin-right: 5px;">
+                        <svg-icon style="margin: 2px;" name="mail"></svg-icon>
+                        <p>邮件</p>
+                    </div>
+                </icon-button>
+            </item-menu>
         </div>
         <div class="line">
             <radio :group="['选项一', '选项二', '选项三', '选项四']" defaultRadio="选项一" @change="(i) => { console.log(i); }">
@@ -89,9 +97,11 @@
             <div class="icon-group">
                 <span v-for="icon in iconGroup" :key="icon">
                     <svg-icon :name="icon"></svg-icon>
-                    <p>{{ icon }}</p>
+                    <p class="user-select">{{ icon }}</p>
                 </span>
             </div>
+        </div>
+        <div>
         </div>
     </div>
 </template>
@@ -102,7 +112,6 @@ import iconButton from '@/components/button/iconButton.vue';
 import tagButton from '@/components/button/tagButton.vue';
 import twoCheckbox from '@/components/checkbox/twoCheckbox.vue';
 import textSelect from './select/textSelect.vue';
-import selectButton from './button/selectButton.vue';
 import radio from './radio/radio.vue';
 import slider from './slider/slider.vue';
 import toggleSwitch from './switch/toggleSwitch.vue';
@@ -110,6 +119,7 @@ import Message from './notification/src/message';
 import customizeTable from './table/customizeTable.vue';
 import customizeDialog from './dialog/customizeDialog.vue';
 import textInput from './input/textInput.vue';
+import itemMenu from './menu/itemMenu.vue';
 import { useThemeStore } from '@/stores/theme.js';
 import svgIcon from "@/assets/icons/svgIcon.vue";
 import { ref, h } from 'vue';
@@ -140,7 +150,7 @@ const items = [
     '选项八'
 ];
 const item = ref('选项一');
-const iconTag = h(svgIcon, { name: 'mail' }, null)
+const showItemMenu = ref(false)
 const iconItems = [
     {
         icon: h(svgIcon, { name: 'send', style: { height: '24px', width: '24px' } }, null),
@@ -148,7 +158,17 @@ const iconItems = [
     },
     {
         icon: h(svgIcon, { name: 'header-close', style: { height: '24px', width: '24px' } }, null),
-        text: '关闭'
+        text: '关闭',
+        items: [
+            {
+                icon: h(svgIcon, { name: 'send', style: { height: '24px', width: '24px' } }, null),
+                text: '发送'
+            },
+            {
+                icon: h(svgIcon, { name: 'send', style: { height: '24px', width: '24px' } }, null),
+                text: '发送'
+            },
+        ]
     }
 ]
 const sliderValue = ref(0)
@@ -243,7 +263,29 @@ const iconGroup = ref([
     "mail",
     "send",
     "save",
-    "cut"
+    "cut",
+    "edit",
+    "code",
+    "link",
+    "heart",
+    "search",
+    "download",
+    "play",
+    "music",
+    "photo",
+    "movie",
+    "pause",
+    "share",
+    "message",
+    "setting",
+    "menu",
+    "paste",
+    "copy",
+    "delete",
+    "application",
+    "microphone",
+    "headphone",
+    "megaphone"
 ]);
 </script>
 
@@ -271,8 +313,8 @@ const iconGroup = ref([
 
 .icon-group span {
     position: relative;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid rgba(var(--app-color), .1);
@@ -282,15 +324,18 @@ const iconGroup = ref([
     align-items: center;
     justify-content: center;
 }
+
 .icon-group span p {
     position: absolute;
     bottom: 5px;
     font-size: 12px;
     color: rgb(var(--app-color));
 }
-.icon-group span:hover{
+
+.icon-group span:hover {
     background-color: var(--app-hover-background-color);
 }
+
 .icon-group :deep(svg) {
     width: 20px;
     height: 20px;
