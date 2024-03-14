@@ -3,26 +3,29 @@
         <slot></slot>
         <transition name="options-animation">
             <div v-show="show" class="options">
-                <div v-if="options.length === 0" class="option" :style="{ 'height': `${optionHeight}px` }">
+                <div v-if="options.length === 0" class="option" :style="{ height: optionHeight }">
                     <div class="option-label">
                         NOT DATA
                     </div>
                 </div>
-                <div v-for="option in  options " :key="optionKey ? option[optionKey] : option"
-                    :style="{ 'height': `${optionHeight}px` }">
+                <div v-for="option in  options " :key="optionKey ? option[optionKey] : option">
                     <template v-if="option.items">
                         <item-menu v-model:show="option.showItems.value" :options="option.items"
                             :option-height="optionHeight" :option-key="optionKey" position="child" @change="change"
-                            style="height: 30px;">
-                            <div class="option" @mouseenter="showChild(option.showItems)">
+                            :style="{ height: optionHeight }">
+                            <div class="option" @mouseenter="showChild(option.showItems)" :style="{ height: optionHeight }">
                                 <component :is="option.icon ? option.icon : 'p'"></component>
                                 <div class="option-label">
                                     {{ option.text }}
                                 </div>
+                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.91 12.75">
+                                    <path class="cls-1"
+                                        d="M.37,12.75c-.1,0-.19-.04-.27-.11-.15-.15-.15-.38,0-.53L5.84,6.38,.11,.64C-.04,.49-.04,.26,.11,.11,.26-.04,.49-.04,.64,.11L6.91,6.38,.64,12.64c-.07,.07-.17,.11-.27,.11Z" />
+                                </svg>
                             </div>
                         </item-menu>
                     </template>
-                    <div v-else class="option" @click.stop="change(option)" @mouseenter="closeChild">
+                    <div v-else class="option" @click.stop="change(option)" @mouseenter="closeChild" :style="{ height: optionHeight }">
                         <component :is="option.icon ? option.icon : 'p'"></component>
                         <div class="option-label">
                             {{ option.text }}
@@ -50,8 +53,8 @@ const props = defineProps({
     },
     // 选项的高度
     optionHeight: {
-        type: Number,
-        default: 30
+        type: String,
+        default: 'max-content'
     },
     // 选项键
     optionKey: {
@@ -108,25 +111,32 @@ const closeChild = () => {
     display: flex;
     align-items: center;
 }
-.item-menu[position="right"] .options{
+
+.item-menu[position="right"] .options {
     left: 100%;
 }
+
 .item-menu[position="left"] .options {
     right: 100%;
 }
+
 .item-menu[position="top"] {
     flex-direction: column-reverse;
 }
+
 .item-menu[position="top"] .options {
     bottom: 100%;
 }
+
 .item-menu[position="bottom"] {
     flex-direction: column;
 }
+
 .item-menu[position="bottom"] .options {
     top: 100%;
 }
-.item-menu[position="child"] .options{
+
+.item-menu[position="child"] .options {
     top: -10px;
     left: 100%;
 }

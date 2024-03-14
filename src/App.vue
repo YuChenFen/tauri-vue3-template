@@ -1,6 +1,6 @@
 <script setup>
 import headerVue from './layout/_partial/header.vue';
-import testVue from './components/test.vue'
+import demo from './components/demo/index.vue'
 
 </script>
 
@@ -8,7 +8,7 @@ import testVue from './components/test.vue'
   <div style="height: 100vh;width: 100vw;">
     <headerVue></headerVue>
     <div class="content">
-      <testVue></testVue>
+      <demo></demo>
     </div>
   </div>
 </template>

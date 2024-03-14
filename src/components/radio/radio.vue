@@ -1,7 +1,8 @@
 <template>
     <div class="radio-group">
         <label class="radio-button" v-for="item in group" :key="item">
-            <input type="radio" :name="inputName" :value="item" :checked="defaultRadio == item" @change="change(item)"/>
+            <input type="radio" :name="inputName" :value="item" :checked="defaultRadio == item"
+                @change="change(item)" />
             <span class="radio">
                 <span class="radio-inner"></span>
             </span>
@@ -18,7 +19,7 @@ const props = defineProps({
         required: false,
         default: () => []
     },
-    defaultRadio:{
+    defaultRadio: {
         type: String,
         required: false,
         default: ''
@@ -40,6 +41,13 @@ function change(item) {
     align-items: center;
     color: rgb(var(--app-color));
     font-size: 14px;
+}
+
+.radio-button p {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .radio-button {
@@ -80,12 +88,15 @@ function change(item) {
     background-color: var(--app-highlight-text-color);
     opacity: 0;
 }
-.radio:hover{
+
+.radio:hover {
     background-color: rgba(var(--text-color), .15);
 }
-.radio:hover .radio-inner{
+
+.radio:hover .radio-inner {
     transform: scale(1.1);
 }
+
 .radio-button input[type="radio"]:checked+.radio {
     border: none;
     background-color: var(--app-highlight-background-color);
