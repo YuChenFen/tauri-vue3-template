@@ -7,14 +7,21 @@
             <span>radio</span>
         </div>
         <div class="line">
-            <radio :group="['选项一', '选项二', '选项三', '选项四']" defaultRadio="选项一" @change="(i) => { console.log(i); }">
+            <radio :group="['选项一', '选项二', '选项三', '选项四']" v-model:value="value" @change="(i) => { console.log(i); console.log(value); }">
             </radio>
+        </div>
+        <div class="line">
+            <navigation-radio :group="['选项一', '选项二', '选项三', '选项四']" v-model:value="value"  @change="(i) => { console.log(i); }"></navigation-radio>
         </div>
     </div>
 </template>
 
 <script setup>
 import radio from '@/components/radio/radio.vue';
+import navigationRadio from '@/components/radio/navigationRadio.vue';
+import { ref } from 'vue';
+
+const value = ref('选项一');
 </script>
 
 <style>

@@ -8,7 +8,7 @@
                         <button class="text-button sure" @click.stop="ok">
                             <p>确认</p>
                         </button>
-                        <button class="text-button cancel" @click.stop="close">
+                        <button class="text-button cancel" @click.stop="no">
                             <p>取消</p>
                         </button>
                     </div>
@@ -27,7 +27,7 @@ const props = defineProps({
         default: false
     }
 })
-const emits = defineEmits(['update:open', 'ok']);
+const emits = defineEmits(['update:open', 'ok', 'no']);
 const dialog = ref(null);
 watch(() => props.open, (value) => {
     if (dialog.value) {
@@ -44,6 +44,10 @@ const close = () => {
 }
 function ok() {
     emits('ok');
+    close();
+}
+function no() {
+    emits('no');
     close();
 }
 </script>

@@ -18,7 +18,7 @@
                                 <div class="option-label">
                                     {{ option.text }}
                                 </div>
-                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.91 12.75">
+                                <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.91 12.75" fill="rgb(var(--app-color))">
                                     <path class="cls-1"
                                         d="M.37,12.75c-.1,0-.19-.04-.27-.11-.15-.15-.15-.38,0-.53L5.84,6.38,.11,.64C-.04,.49-.04,.26,.11,.11,.26-.04,.49-.04,.64,.11L6.91,6.38,.64,12.64c-.07,.07-.17,.11-.27,.11Z" />
                                 </svg>

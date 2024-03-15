@@ -1,9 +1,8 @@
 <template>
     <div class="radio-group">
         <label class="radio-button" v-for="item in group" :key="item">
-            <input type="radio" :name="inputName" :value="item" :checked="defaultRadio == item"
-                @change="change(item)" />
-            <span class="radio">
+            <input type="radio" :name="inputName" :id="item" :value="item" :checked="value === item" @change="change(item)" />
+            <span class="radio" :for="item">
                 <span class="radio-inner"></span>
             </span>
             <p>{{ item }}</p>
@@ -19,17 +18,18 @@ const props = defineProps({
         required: false,
         default: () => []
     },
-    defaultRadio: {
+    value: {
         type: String,
         required: false,
         default: ''
     }
 })
-const inputName = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36)
-const emits = defineEmits(['change'])
+const inputName = Number(Math.random().toString().substr(3, 10) + Date.now()).toString(36);
+const emits = defineEmits(['update:value', 'change']);
 
 function change(item) {
-    emits('change', item)
+    emits('update:value', item);
+    emits('change', item);
 }
 
 </script>

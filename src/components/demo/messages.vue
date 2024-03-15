@@ -20,13 +20,17 @@
         </div>
         <div class="line">
             <text-button text="打开对话框" @click="isOpenDialog = true"></text-button>
-            <customize-dialog v-model:open="isOpenDialog" @ok="() => { console.log('点击了确定按钮'); }">
+            <customize-dialog v-model:open="isOpenDialog" @ok="() => { console.log('点击了确定按钮'); }" @no="() => { console.log('点击了取消按钮'); }">
                 <template #body>
                     <div class="user-select" style="padding: 20px;">
                         <header style="font-size: 20px;font-weight: 500;margin-bottom: 10px;">
                             这是一个对话框
                         </header>
-                        <p>云朵飘过天空，风儿轻轻吹拂，却引不起心中的一丝波澜。我在时间的河流里漂流，像一片落叶，不知道会飘向何方。月亮挂在夜空，星辰闪烁，但我的心却像一片荒芜的沙漠，没有生机，没有希望。我在寻找着某种东西，却又不知道那到底是什么，只是盲目地前行，不知道何时会停下脚步。这一切都是那么的无意义，却又让我感到无尽的迷茫和困惑。
+                        <p>
+                            人永远不会知道，谁哪次不经意的跟你说了再见之后，就真的不会见了。
+                        </p>
+                        <p style="text-align: right;">
+                            ——《千与千寻》
                         </p>
                     </div>
                 </template>
