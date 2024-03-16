@@ -11,13 +11,14 @@ edition = "2021"
 tauri-build = { version = "1", features = [] }
 
 [dependencies]
-tauri = { version = "1", features = [ "macos-private-api", "window-all", "shell-open"] }
+tauri = { version = "1", features = [ "window-all", "shell-sidecar", "macos-private-api", "shell-open"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 window-vibrancy = "0.4.3"
 window-shadows = "0.2.1"
 sqlx = { version = "0.7.2", features = ["runtime-tokio", "sqlite"] }
 dotenv="0.15.0"
+command-group = "2.1.0"
 
 [features]
 # This feature is used for production builds or when a dev server is not specified, DO NOT REMOVE!!

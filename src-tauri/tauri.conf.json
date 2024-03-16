@@ -14,9 +14,16 @@
       "all": false,
       "shell": {
         "all": false,
-        "open": true
+        "open": true,
+        "sidecar": true,
+        "scope": [
+          {
+            "name": "bin/api/main",
+            "sidecar": true
+          }
+        ]
       },
-      "window":{
+      "window": {
         "all": true
       }
     },
@@ -46,6 +53,9 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
+      ],
+      "externalBin": [
+        "bin/api/main"
       ]
     }
   }
