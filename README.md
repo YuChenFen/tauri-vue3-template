@@ -9,9 +9,19 @@
 
 ## 开始使用
 
-1. 安装使用
+1. 安装依赖
 ```powershell
 npm install
+```
+
+2. Run
+```powershell
+npm run tauri dev
+```
+
+3. 打包
+```powershell
+npm run tauri build
 ```
 
 ## 文档

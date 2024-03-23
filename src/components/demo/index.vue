@@ -16,7 +16,7 @@
             </template>
             <template #footer>
                 <listMenu :options="listMenuOptions3" optionKey="id" v-model:highlightItem="listMenuHighlightItem"
-                    @change="changePage" style="margin-bottom: 8px;"></listMenu>
+                    @change="changePage" style="margin-bottom: 8px;margin-top: 5px;"></listMenu>
             </template>
             <template #content>
                 <slide>
@@ -45,6 +45,7 @@ import messages from './messages.vue';
 import tables from './tables.vue';
 import inputs from './inputs.vue';
 import menus from './menus.vue';
+import card from './cards.vue';
 import { ref, h, shallowRef } from 'vue';
 
 const curPage = shallowRef(home)
@@ -87,6 +88,9 @@ const changePage = (e) =>{
             curPage.value = menus
             break
         case 12:
+            curPage.value = card
+            break
+        case -1:
             curPage.value = setting
     }
 }
@@ -145,12 +149,16 @@ const listMenuOptions2 = [
     {
         component: h(svgIcon, { name: 'menu', style: iconStyle }, null),
         id: 11,
-    }
+    },
+    {
+        component: h(svgIcon, { name: 'heart', style: iconStyle }, null),
+        id: 12,
+    },
 ]
 const listMenuOptions3 = [
     {
         component: h(svgIcon, { name: 'setting', style: iconStyle }, null),
-        id: 12,
+        id: -1,
     },
 ]
 </script>

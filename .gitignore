@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 target
+main-x86_64-pc-windows-msvc.exe
 
 # Editor directories and files
 .vscode/*
